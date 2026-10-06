@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>🎓 EduManage</h2>
+        <p class="side-label">MAIN MENU</p>
+        <a href="#dashboard" class="active">▦ Dashboard</a>
+        <a href="#students">👥 Students</a>
+        <a href="#student-form">➕ Add Student</a>
+        <p class="side-footer">Student Management System<br>Academic Portal</p>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Student Dashboard</h1>
+                <p>Manage student records in one place.</p>
+            </div>
+            <div class="topbar-actions">
+                <span class="admin-badge">Administrator</span>
+                <button id="logoutButton" type="button" class="btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <section id="dashboard" class="stats">
+            <article class="stat-card blue">
+                <span>Total Students</span>
+                <h2 id="totalStudents">0</h2>
+                <small>Registered students</small>
+            </article>
+            <article class="stat-card green">
+                <span>Average Marks</span>
+                <h2 id="averageMarks">0%</h2>
+                <small>Across all students</small>
+            </article>
+            <article class="stat-card orange">
+                <span>Average Attendance</span>
+                <h2 id="averageAttendance">0%</h2>
+                <small>Attendance percentage</small>
+            </article>
+            <article class="stat-card purple">
+                <span>Courses</span>
+                <h2 id="totalCourses">0</h2>
+                <small>Unique courses</small>
+            </article>
+        </section>
+
+        <section id="student-profile" class="panel profile-panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Student Profile</h2>
+                    <p>Quick overview of the selected student record.</p>
+                </div>
+            </div>
+
+            <div class="profile-card" id="profileCard">
+                <div class="profile-avatar" id="profileAvatar">
+                    <span id="profileInitials">NA</span>
+                    <img id="profilePhoto" alt="" hidden>
+                    <label class="photo-upload" for="profilePhotoInput" title="Upload student photo">+</label>
+                    <input id="profilePhotoInput" type="file" accept="image/*" hidden>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <div>
+                            <p class="profile-label">Student Name</p>
+                            <h3 id="profileName">No student selected</h3>
+                        </div>
+                        <span class="profile-badge" id="profileBadge">Profile</span>
+                    </div>
+
+                    <div class="profile-grid">
+                        <div>
+                            <span>Email</span>
+                            <strong id="profileEmail">-</strong>
+                        </div>
+                        <div>
+                            <span>Phone</span>
+                            <strong id="profilePhone">-</strong>
+                        </div>
+                        <div>
+                            <span>Course</span>
+                            <strong id="profileCourse">-</strong>
+                        </div>
+                        <div>
+                            <span>Year</span>
+                            <strong id="profileYear">-</strong>
+                        </div>
+                        <div>
+                            <span>Marks</span>
+                            <strong id="profileMarks">-</strong>
+                        </div>
+                        <div>
+                            <span>Attendance</span>
+                            <strong id="profileAttendance">-</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="student-form" class="panel">
+            <div class="section-heading">
+                <div>
+                    <h2 id="formTitle">Register New Student</h2>
+                    <p>Enter the student information below.</p>
+                </div>
+            </div>
+
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+
+                <div class="form-grid">
+                    <label>Full Name *
+                        <input id="name" required maxlength="80"
+                               placeholder="Enter full name">
+                    </label>
+
+                    <label>Email *
+                        <input id="email" type="email" required maxlength="120"
+                               placeholder="student@example.com">
+                    </label>
+
+                    <label>Phone Number *
+                        <input id="phone" type="tel" required
+                               pattern="[0-9]{10}" maxlength="10"
+                               placeholder="10-digit number">
+                    </label>
+
+                    <label>Course *
+                        <select id="course" required>
+                            <option value="">Select course</option>
+                            <option value="BCA">BCA</option>
+                            <option value="B.Sc Computer Science">B.Sc Computer Science</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="BBA">BBA</option>
+                            <option value="B.E Computer Science">B.E Computer Science</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </label>
+
+                    <label>Year *
+                        <select id="year" required>
+                            <option value="">Select year</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Fourth Year</option>
+                        </select>
+                    </label>
+
+                    <label>Marks (%) *
+                        <input id="marks" type="number" min="0" max="100"
+                               step="0.01" required placeholder="e.g. 85">
+                    </label>
+
+                    <label>Attendance (%) *
+                        <input id="attendance" type="number" min="0" max="100"
+                               step="0.01" required placeholder="e.g. 90">
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" id="saveButton">
+                        Save Student
+                    </button>
+                    <button type="button" class="btn-secondary" id="cancelButton"
+                            hidden>Cancel Edit</button>
+                </div>
+            </form>
+            <p id="message" role="status"></p>
+        </section>
+
+        <section id="students" class="panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Student Records</h2>
+                    <p>View, search, edit, or remove records.</p>
+                </div>
+                <button id="exportButton" class="btn-primary">Export CSV</button>
+            </div>
+
+            <div class="toolbar">
+                <input id="searchInput" placeholder="Search name, ID or email...">
+                <select id="courseFilter">
+                    <option value="">All Courses</option>
+                </select>
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+                <button id="refreshButton" class="btn-secondary">Refresh</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name / Email</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>Marks</th>
+                            <th>Attendance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTable">
+                        <tr><td colspan="7">Loading student records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="recordCount" class="record-count">0 records</p>
+        </section>
+
+        <footer>© 2026 EduManage · Student Management System</footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

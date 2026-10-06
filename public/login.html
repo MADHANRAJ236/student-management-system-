@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManage Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+    <div class="login-shell">
+        <div class="login-card">
+            <div class="login-brand">
+                <span class="brand-badge">🎓</span>
+                <h1>EduManage</h1>
+            </div>
+
+            <p class="login-subtitle">Student Management Portal</p>
+
+            <form id="loginForm" class="login-form" novalidate>
+                <label for="loginEmail">Email Address</label>
+                <input id="loginEmail" type="email" placeholder="admin@edu.com" required>
+
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" placeholder="Enter password" required>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary login-btn">Login</button>
+                <p id="loginMessage" class="login-message" role="status"></p>
+            </form>
+
+            <div class="demo-box">
+                <strong>Demo login:</strong>
+                <span>admin@edu.com / admin123</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+        const loginEmail = document.getElementById("loginEmail");
+        const loginPassword = document.getElementById("loginPassword");
+
+        const validUser = {
+            email: "admin@edu.com",
+            password: "admin123"
+        };
+
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value.trim();
+
+            if (!email || !password) {
+                loginMessage.textContent = "Please enter both email and password.";
+                loginMessage.className = "login-message error";
+                return;
+            }
+
+            if (email === validUser.email && password === validUser.password) {
+                localStorage.setItem("eduManageLoggedIn", "true");
+                localStorage.setItem("eduManageUser", email);
+                loginMessage.textContent = "Login successful. Redirecting...";
+                loginMessage.className = "login-message success";
+                window.location.href = "index.html";
+                return;
+            }
+
+            loginMessage.textContent = "Invalid email or password. Try the demo credentials.";
+            loginMessage.className = "login-message error";
+        });
+    </script>
+</body>
+</html>
